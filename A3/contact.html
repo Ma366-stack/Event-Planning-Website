@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamEvents | Contact Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Input mask library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ff6b6b',
+                        secondary: '#ff5252',
+                        dark: {
+                            800: '#1a1a1a',
+                            700: '#262626',
+                            600: '#333333',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Back to top button */
+        .back-to-top {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            transition: all 0.3s;
+        }
+        
+        /* Cookie consent banner */
+        .cookie-consent {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: #333;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+        .cookie-consent.show {
+            transform: translateY(0);
+        }
+        
+        /* Character counter */
+        .char-counter {
+            font-size: 0.75rem;
+            text-align: right;
+            margin-top: 0.25rem;
+            color: #6b7280;
+        }
+        .char-counter.limit-reached {
+            color: #ef4444;
+        }
+        
+        /* File upload styling */
+        .file-upload {
+            transition: all 0.3s;
+        }
+        .file-upload:hover {
+            border-color: #ff6b6b;
+            background-color: #f9fafb;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans dark:bg-dark-800 dark:text-gray-200">
+    <!-- Cookie Consent Banner -->
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="mb-4 md:mb-0 md:mr-4">
+                    <p class="text-sm md:text-base">We use cookies to ensure you get the best experience on our website. <a href="#" class="text-primary hover:underline">Learn more</a></p>
+                </div>
+                <div class="flex space-x-4">
+                    <button id="acceptCookies" class="bg-primary hover:bg-secondary text-white font-semibold py-2 px-4 rounded transition">
+                        Accept
+                    </button>
+                    <button id="declineCookies" class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded transition">
+                        Decline
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="fixed w-full bg-white shadow-md z-50 dark:bg-dark-700">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0">
+                    <h1 class="text-2xl font-bold"><span class="text-primary">Dream</span>Events</h1>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <ul class="flex space-x-8">
+                        <li><a href="index.html" class="font-semibold hover:text-primary transition">Home</a></li>
+                        <li><a href="events.html" class="font-semibold hover:text-primary transition">Events</a></li>
+                        <li><a href="services.html" class="font-semibold hover:text-primary transition">Services</a></li>
+                        <li><a href="gallery.html" class="font-semibold hover:text-primary transition">Gallery</a></li>
+                        <li><a href="contact.html" class="text-primary font-semibold hover:text-secondary transition">Contact</a></li>
+                    </ul>
+                    <!-- Dark mode toggle -->
+                    <button id="darkModeToggle" class="ml-4 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-dark-600 transition">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block text-yellow-300"></i>
+                    </button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="darkModeToggleMobile" class="mr-4 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-dark-600 transition">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block text-yellow-300"></i>
+                    </button>
+                    <button class="text-gray-800 dark:text-gray-200 focus:outline-none mobile-menu-button">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div class="md:hidden hidden mobile-menu">
+                <ul class="px-2 pt-2 pb-4 space-y-2">
+                    <li><a href="index.html" class="block px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-dark-600">Home</a></li>
+                    <li><a href="events.html" class="block px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-dark-600">Events</a></li>
+                    <li><a href="services.html" class="block px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-dark-600">Services</a></li>
+                    <li><a href="gallery.html" class="block px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-dark-600">Gallery</a></li>
+                    <li><a href="contact.html" class="block px-3 py-2 rounded-md bg-primary text-white">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top bg-primary hover:bg-secondary text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 transform hover:scale-110">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </button>
+
+    <!-- Contact Banner -->
+    <section class="pt-32 pb-20 md:pt-40 md:pb-28 bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3')">
+        <div class="container mx-auto px-4 text-center text-white">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Get In Touch</h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto">We'd love to hear about your dream event!</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-16 md:py-20 lg:py-24 bg-white dark:bg-dark-700">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row gap-12 max-w-6xl mx-auto">
+                <!-- Contact Form -->
+                <div class="lg:w-1/2">
+                    <div class="bg-gray-50 dark:bg-dark-600 p-8 md:p-10 rounded-lg shadow-md">
+                        <h2 class="text-3xl font-bold mb-8">Send Us a Message</h2>
+                        <form class="space-y-6" id="contactForm">
+                            <div class="form-group">
+                                <input type="text" placeholder="Your Name" class="w-full px-4 py-3 border border-gray-300 dark:border-dark-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-dark-700 dark:text-white" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Your Email" class="w-full px-4 py-3 border border-gray-300 dark:border-dark-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-dark-700 dark:text-white" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" id="phone" placeholder="Phone Number" class="w-full px-4 py-3 border border-gray-300 dark:border-dark-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-dark-700 dark:text-white">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="address" placeholder="Your Address" class="w-full px-4 py-3 border border-gray-300 dark:border-dark-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-dark-700 dark:text-white">
+                            </div>
+                            <div class="form-group">
+                                <select class="w-full px-4 py-3 border border-gray-300 dark:border-dark-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none bg-white dark:bg-dark-700 dark:text-white bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNoZXZyb24tZG93biI+PHBhdGggZD0ibTYgOSA2IDYgNi02Ii8+PC9zdmc+')] bg-no-repeat bg-[right_1rem_center] bg-[length:1.5rem]">
+                                    <option value="" disabled selected>Event Type</option>
+                                    <option>Wedding</option>
+                                    <option>Corporate</option>
+                                    <option>Birthday</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" placeholder="Tell us about your event..." rows="5" maxlength="500" class="w-full px-4 py-3 border border-gray-300 dark:border-dark-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-dark-700 dark:text-white" required></textarea>
+                                <div id="charCounter" class="char-counter"><span id="charCount">0</span>/500</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Upload Event Details (Optional)</label>
+                                <div class="flex items-center justify-center w-full">
+                                    <label class="flex flex-col w-full h-32 border-2 border-dashed border-gray-300 dark:border-dark-500 hover:border-primary hover:bg-gray-100 dark:hover:bg-dark-500 rounded-lg cursor-pointer transition file-upload">
+                                        <div class="flex flex-col items-center justify-center pt-7">
+                                            <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 dark:text-gray-500"></i>
+                                            <p class="pt-1 text-sm text-gray-500 dark:text-gray-400">Click to upload or drag and drop</p>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400">PDF, DOC, JPG up to 5MB</p>
+                                        </div>
+                                        <input type="file" class="opacity-0" id="fileUpload" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                                    </label>
+                                </div>
+                                <div id="fileName" class="text-sm text-gray-500 dark:text-gray-400 mt-2 hidden"></div>
+                            </div>
+                            <button type="submit" class="w-full bg-primary hover:bg-secondary text-white font-semibold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                                Submit
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="lg:w-1/2">
+                    <div class="sticky top-32">
+                        <h2 class="text-3xl font-bold mb-8">Contact Information</h2>
+                        <div class="space-y-6">
+                            <!-- Address Card -->
+                            <div class="flex items-start p-6 bg-gray-50 dark:bg-dark-600 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                                <div class="text-primary text-2xl mr-6 mt-1">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Address</h3>
+                                    <p class="text-gray-600 dark:text-gray-300">123 Event Street, Alipur 456<br>Hafiza Baad, NY 10001</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Phone Card -->
+                            <div class="flex items-start p-6 bg-gray-50 dark:bg-dark-600 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                                <div class="text-primary text-2xl mr-6 mt-1">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Phone</h3>
+                                    <p class="text-gray-600 dark:text-gray-300">+92 3414490657</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Email Card -->
+                            <div class="flex items-start p-6 bg-gray-50 dark:bg-dark-600 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                                <div class="text-primary text-2xl mr-6 mt-1">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Email</h3>
+                                    <p class="text-gray-600 dark:text-gray-300">info@dreamevents.com</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Business Hours Card -->
+                            <div class="flex items-start p-6 bg-gray-50 dark:bg-dark-600 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                                <div class="text-primary text-2xl mr-6 mt-1">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Business Hours</h3>
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        Monday-Friday: 9am-6pm<br>
+                                        Saturday: 10am-4pm<br>
+                                        Sunday: Closed
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <!-- Social Media -->
+                            <div class="p-6 bg-gray-50 dark:bg-dark-600 rounded-lg shadow-sm">
+                                <h3 class="text-xl font-semibold mb-4">Follow Us</h3>
+                                <div class="flex space-x-4">
+                                    <a href="#" class="w-10 h-10 flex items-center justify-center bg-primary hover:bg-secondary text-white rounded-full transition duration-300 transform hover:scale-110">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 flex items-center justify-center bg-primary hover:bg-secondary text-white rounded-full transition duration-300 transform hover:scale-110">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 flex items-center justify-center bg-primary hover:bg-secondary text-white rounded-full transition duration-300 transform hover:scale-110">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 flex items-center justify-center bg-primary hover:bg-secondary text-white rounded-full transition duration-300 transform hover:scale-110">
+                                        <i class="fab fa-pinterest-p"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="w-full h-96 md:h-[450px]">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215573291234!2d-73.98784492416418!3d40.74844097138945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1713456321239!5m2!1sen!2sus" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                class="block">
+        </iframe>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 dark:bg-dark-700 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-2xl font-bold"><span class="text-primary">Dream</span>Events</h2>
+                    <p class="mt-2 text-gray-400">Making your events extraordinary.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-xl transition">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white text-xl transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white text-xl transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white text-xl transition">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+                <p>&copy; <span id="current-year"></span> DreamEvents. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Mobile menu toggle
+        document.querySelector('.mobile-menu-button').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.toggle('hidden');
+        });
+
+        // 2. Current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // 3. Form validation
+        const form = document.getElementById('contactForm');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add your form validation logic here
+            alert('Thank you for your message! We will contact you soon.');
+            form.reset();
+            document.getElementById('charCount').textContent = '0';
+            document.getElementById('fileName').classList.add('hidden');
+        });
+
+        // 4. Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 5. Input focus effects
+        document.querySelectorAll('input, textarea, select').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('ring-2', 'ring-primary', 'rounded-lg');
+            });
+            input.addEventListener('blur', function() {
+                this.parentElement.classList.remove('ring-2', 'ring-primary', 'rounded-lg');
+            });
+        });
+
+        // 6. Scroll animations
+        window.addEventListener('scroll', revealOnScroll);
+
+        function revealOnScroll() {
+            const elements = document.querySelectorAll('.form-group, .info-card');
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                if (elementPosition < screenPosition) {
+                    element.classList.add('opacity-100', 'translate-y-0');
+                    element.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+            
+            // Back to top button visibility
+            if (window.pageYOffset > 300) {
+                document.getElementById('backToTop').style.display = 'flex';
+            } else {
+                document.getElementById('backToTop').style.display = 'none';
+            }
+        }
+
+        // Initialize elements with opacity-0 for scroll reveal
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.form-group, .info-card').forEach(el => {
+                el.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-500');
+            });
+            revealOnScroll(); // Run once on load
+            
+            // Show cookie consent banner after 2 seconds if not already accepted
+            setTimeout(() => {
+                if (!localStorage.getItem('cookieConsent')) {
+                    document.getElementById('cookieConsent').classList.add('show');
+                }
+            }, 2000);
+        });
+
+        // 7. Contact form submission animation
+        const submitBtn = document.querySelector('button[type="submit"]');
+        submitBtn.addEventListener('click', function() {
+            this.classList.add('animate-pulse');
+            setTimeout(() => {
+                this.classList.remove('animate-pulse');
+            }, 1000);
+        });
+
+        // 8. Social media icon hover effects
+        document.querySelectorAll('.social-icons a').forEach(icon => {
+            icon.addEventListener('mouseenter', function() {
+                this.querySelector('i').classList.add('fa-bounce');
+            });
+            icon.addEventListener('mouseleave', function() {
+                this.querySelector('i').classList.remove('fa-bounce');
+            });
+        });
+
+        // 9. Back to top button functionality
+        document.getElementById('backToTop').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 10. Form field character counter
+        const messageTextarea = document.getElementById('message');
+        const charCount = document.getElementById('charCount');
+        const charCounter = document.getElementById('charCounter');
+        
+        messageTextarea.addEventListener('input', function() {
+            const currentLength = this.value.length;
+            charCount.textContent = currentLength;
+            
+            if (currentLength >= 500) {
+                charCounter.classList.add('limit-reached');
+            } else {
+                charCounter.classList.remove('limit-reached');
+            }
+        });
+
+        // 11. Input mask for phone number
+        $(document).ready(function(){
+            $('#phone').inputmask('(999) 999-9999');
+        });
+
+        // 12. Auto-complete for address (placeholder - would use Google Places API)
+        document.getElementById('address').addEventListener('focus', function() {
+            console.log('Address field focused - would implement Google Places autocomplete here');
+        });
+
+        // 13. File upload display
+        const fileUpload = document.getElementById('fileUpload');
+        const fileNameDisplay = document.getElementById('fileName');
+        
+        fileUpload.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                fileNameDisplay.textContent = `Selected file: ${this.files[0].name}`;
+                fileNameDisplay.classList.remove('hidden');
+            } else {
+                fileNameDisplay.classList.add('hidden');
+            }
+        });
+
+        // 14. Dark mode toggle
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+        }
+        
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.documentElement.classList.add('dark');
+        }
+        
+        // Set up toggle buttons
+        document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
+        document.getElementById('darkModeToggleMobile').addEventListener('click', toggleDarkMode);
+
+        // 15. Cookie consent banner
+        document.getElementById('acceptCookies').addEventListener('click', function() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            document.getElementById('cookieConsent').classList.remove('show');
+        });
+        
+        document.getElementById('declineCookies').addEventListener('click', function() {
+            localStorage.setItem('cookieConsent', 'declined');
+            document.getElementById('cookieConsent').classList.remove('show');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamEvents | Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Lightbox CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ff6b6b',
+                        secondary: '#ff5252',
+                        accent: '#feca57',
+                        dark: {
+                            800: '#1a1a1a',
+                            900: '#121212',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'Arial', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        .gradient-text {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .gallery-item {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+        
+        .favorite-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .favorite-btn.active {
+            color: #ff6b6b;
+            transform: scale(1.1);
+        }
+        
+        .category-counter {
+            transition: all 0.3s ease;
+        }
+        
+        .category-counter.active {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        
+        .search-box {
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus {
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.3);
+        }
+        
+        .loading-spinner {
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ff6b6b;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans dark:bg-dark-900 dark:text-gray-200">
+    <!-- Navigation Bar -->
+    <nav class="fixed w-full bg-white/90 dark:bg-dark-800/90 backdrop-blur-md shadow-md z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0">
+                    <h1 class="text-2xl font-bold"><span class="gradient-text">Dream</span>Events</h1>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <ul class="flex space-x-8">
+                        <li><a href="index.html" class="font-semibold hover:text-primary transition dark:hover:text-primary-300 relative group">
+                            Home
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                        <li><a href="events.html" class="font-semibold hover:text-primary transition dark:hover:text-primary-300 relative group">
+                            Events
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                        <li><a href="services.html" class="font-semibold hover:text-primary transition dark:hover:text-primary-300 relative group">
+                            Services
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                        <li><a href="gallery.html" class="text-primary font-semibold hover:text-secondary transition dark:hover:text-primary-300 relative group">
+                            Gallery
+                            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-primary"></span>
+                        </a></li>
+                        <li><a href="contact.html" class="font-semibold hover:text-primary transition dark:hover:text-primary-300 relative group">
+                            Contact
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                    </ul>
+                    <!-- Dark Mode Toggle -->
+                    <button id="darkModeToggle" class="ml-4 p-2 rounded-full focus:outline-none hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                        <i class="fas fa-moon text-gray-700 dark:text-yellow-300"></i>
+                    </button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuButton" class="text-gray-800 dark:text-gray-200 focus:outline-none mr-4">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                    <!-- Mobile Dark Mode Toggle -->
+                    <button id="mobileDarkModeToggle" class="p-2 rounded-full focus:outline-none hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                        <i class="fas fa-moon text-gray-700 dark:text-yellow-300"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white/95 dark:bg-dark-800/95 backdrop-blur-md shadow-lg">
+            <ul class="px-4 py-2">
+                <li class="py-3 border-b border-gray-100 dark:border-gray-700"><a href="index.html" class="block font-semibold hover:text-primary transition dark:hover:text-primary-300">Home</a></li>
+                <li class="py-3 border-b border-gray-100 dark:border-gray-700"><a href="events.html" class="block font-semibold hover:text-primary transition dark:hover:text-primary-300">Events</a></li>
+                <li class="py-3 border-b border-gray-100 dark:border-gray-700"><a href="services.html" class="block font-semibold hover:text-primary transition dark:hover:text-primary-300">Services</a></li>
+                <li class="py-3 border-b border-gray-100 dark:border-gray-700"><a href="gallery.html" class="block font-semibold text-primary transition">Gallery</a></li>
+                <li class="py-3"><a href="contact.html" class="block font-semibold hover:text-primary transition dark:hover:text-primary-300">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Gallery Banner -->
+    <section class="pt-32 pb-20 md:pt-40 md:pb-28 bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3')">
+        <div class="container mx-auto px-4 text-center text-white">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Our Gallery</h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto">Explore the magic we've created for our clients.</p>
+        </div>
+    </section>
+
+    <!-- Gallery Controls -->
+    <section class="py-8 md:py-12 bg-white dark:bg-dark-800">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <!-- Search Box -->
+                <div class="w-full md:w-auto">
+                    <div class="relative">
+                        <input type="text" id="searchInput" placeholder="Search images..." class="w-full md:w-64 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-full focus:outline-none focus:ring-2 focus:ring-primary search-box dark:bg-dark-700">
+                        <button class="absolute right-3 top-2 text-gray-400 hover:text-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Filter Buttons -->
+                <div class="flex flex-wrap justify-center gap-2">
+                    <button class="filter-btn active px-4 py-2 rounded-full bg-primary text-white font-semibold transition flex items-center" data-filter="all">
+                        All Events <span class="category-counter active ml-2 bg-white text-primary text-xs px-2 py-1 rounded-full">12</span>
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-dark-700 dark:hover:bg-dark-600 font-semibold transition flex items-center" data-filter="wedding">
+                        Weddings <span class="category-counter ml-2 bg-gray-100 dark:bg-dark-600 text-gray-800 dark:text-gray-200 text-xs px-2 py-1 rounded-full">5</span>
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-dark-700 dark:hover:bg-dark-600 font-semibold transition flex items-center" data-filter="corporate">
+                        Corporate <span class="category-counter ml-2 bg-gray-100 dark:bg-dark-600 text-gray-800 dark:text-gray-200 text-xs px-2 py-1 rounded-full">4</span>
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-dark-700 dark:hover:bg-dark-600 font-semibold transition flex items-center" data-filter="birthday">
+                        Birthdays <span class="category-counter ml-2 bg-gray-100 dark:bg-dark-600 text-gray-800 dark:text-gray-200 text-xs px-2 py-1 rounded-full">3</span>
+                    </button>
+                </div>
+                
+                <!-- Sort Dropdown -->
+                <div class="relative">
+                    <select id="sortSelect" class="appearance-none px-4 py-2 pr-8 border border-gray-300 dark:border-gray-600 rounded-full focus:outline-none focus:ring-2 focus:ring-primary dark:bg-dark-700">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="popular">Most Popular</option>
+                    </select>
+                    <div class="absolute right-3 top-2 pointer-events-none">
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery Grid -->
+    <section class="py-12 md:py-16 bg-gray-50 dark:bg-dark-900">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="galleryGrid">
+                <!-- Wedding Images -->
+                <div class="gallery-item wedding" data-date="2023-06-15" data-likes="42">
+                    <div class="relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition duration-300 h-full">
+                        <a href="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3" data-lightbox="gallery" data-title="Elegant Wedding - Grand Ballroom Celebration">
+                            <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3" alt="Wedding" class="w-full h-64 object-cover transition duration-300 hover:scale-105">
+                        </a>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-end p-4">
+                            <h3 class="text-xl font-bold text-white mb-1">Elegant Wedding</h3>
+                            <p class="text-gray-200 text-sm">Grand Ballroom Celebration</p>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="text-gray-200 text-xs"><i class="fas fa-heart mr-1"></i> 42</span>
+                                <div class="flex space-x-2">
+                                    <button class="share-btn text-white hover:text-accent transition" data-image="wedding1.jpg">
+                                        <i class="fas fa-share-alt"></i>
+                                    </button>
+                                    <button class="favorite-btn text-white hover:text-accent transition">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item wedding" data-date="2023-05-22" data-likes="38">
+                    <div class="relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition duration-300 h-full">
+                        <a href="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3" data-lightbox="gallery" data-title="Outdoor Wedding - Beachside Ceremony">
+                            <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3" alt="Wedding" class="w-full h-64 object-cover transition duration-300 hover:scale-105">
+                        </a>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-end p-4">
+                            <h3 class="text-xl font-bold text-white mb-1">Outdoor Wedding</h3>
+                            <p class="text-gray-200 text-sm">Beachside Ceremony</p>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="text-gray-200 text-xs"><i class="fas fa-heart mr-1"></i> 38</span>
+                                <div class="flex space-x-2">
+                                    <button class="share-btn text-white hover:text-accent transition" data-image="wedding2.jpg">
+                                        <i class="fas fa-share-alt"></i>
+                                    </button>
+                                    <button class="favorite-btn text-white hover:text-accent transition">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Corporate Images -->
+                <div class="gallery-item corporate" data-date="2023-04-10" data-likes="29">
+                    <div class="relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition duration-300 h-full">
+                        <a href="https://images.unsplash.com/photo-1492681290082-e932832941e6?ixlib=rb-4.0.3" data-lightbox="gallery" data-title="Business Conference - Annual Tech Summit">
+                            <img src="https://images.unsplash.com/photo-1492681290082-e932832941e6?ixlib=rb-4.0.3" alt="Corporate" class="w-full h-64 object-cover transition duration-300 hover:scale-105">
+                        </a>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-end p-4">
+                            <h3 class="text-xl font-bold text-white mb-1">Business Conference</h3>
+                            <p class="text-gray-200 text-sm">Annual Tech Summit</p>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="text-gray-200 text-xs"><i class="fas fa-heart mr-1"></i> 29</span>
+                                <div class="flex space-x-2">
+                                    <button class="share-btn text-white hover:text-accent transition" data-image="corporate1.jpg">
+                                        <i class="fas fa-share-alt"></i>
+                                    </button>
+                                    <button class="favorite-btn text-white hover:text-accent transition">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item corporate" data-date="2023-03-18" data-likes="35">
+                    <div class="relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition duration-300 h-full">
+                        <a href="https://images.unsplash.com/photo-1531058020387-3be344556be6?ixlib=rb-4.0.3" data-lightbox="gallery" data-title="Product Launch - Innovative Showcase">
+                            <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?ixlib=rb-4.0.3" alt="Corporate" class="w-full h-64 object-cover transition duration-300 hover:scale-105">
+                        </a>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-end p-4">
+                            <h3 class="text-xl font-bold text-white mb-1">Product Launch</h3>
+                            <p class="text-gray-200 text-sm">Innovative Showcase</p>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="text-gray-200 text-xs"><i class="fas fa-heart mr-1"></i> 35</span>
+                                <div class="flex space-x-2">
+                                    <button class="share-btn text-white hover:text-accent transition" data-image="corporate2.jpg">
+                                        <i class="fas fa-share-alt"></i>
+                                    </button>
+                                    <button class="favorite-btn text-white hover:text-accent transition">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Birthday Images -->
+                <div class="gallery-item birthday" data-date="2023-02-14" data-likes="47">
+                    <div class="relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition duration-300 h-full">
+                        <a href="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3" data-lightbox="gallery" data-title="Sweet 16 Party - Pink & Gold Theme">
+                            <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3" alt="Birthday" class="w-full h-64 object-cover transition duration-300 hover:scale-105">
+                        </a>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-end p-4">
+                            <h3 class="text-xl font-bold text-white mb-1">Sweet 16 Party</h3>
+                            <p class="text-gray-200 text-sm">Pink & Gold Theme</p>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="text-gray-200 text-xs"><i class="fas fa-heart mr-1"></i> 47</span>
+                                <div class="flex space-x-2">
+                                    <button class="share-btn text-white hover:text-accent transition" data-image="birthday1.jpg">
+                                        <i class="fas fa-share-alt"></i>
+                                    </button>
+                                    <button class="favorite-btn text-white hover:text-accent transition">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item birthday" data-date="2023-01-05" data-likes="31">
+                    <div class="relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition duration-300 h-full">
+                        <a href="https://images.unsplash.com/photo-1495563923587-bdc4282494d0?ixlib=rb-4.0.3" data-lightbox="gallery" data-title="Kids Birthday - Superhero Adventure">
+                            <img src="https://images.unsplash.com/photo-1495563923587-bdc4282494d0?ixlib=rb-4.0.3" alt="Birthday" class="w-full h-64 object-cover transition duration-300 hover:scale-105">
+                        </a>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-end p-4">
+                            <h3 class="text-xl font-bold text-white mb-1">Kids Birthday</h3>
+                            <p class="text-gray-200 text-sm">Superhero Adventure</p>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="text-gray-200 text-xs"><i class="fas fa-heart mr-1"></i> 31</span>
+                                <div class="flex space-x-2">
+                                    <button class="share-btn text-white hover:text-accent transition" data-image="birthday2.jpg">
+                                        <i class="fas fa-share-alt"></i>
+                                    </button>
+                                    <button class="favorite-btn text-white hover:text-accent transition">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- More Images -->
+                <div class="gallery-item wedding" data-date="2022-12-20" data-likes="26">
+                    <div class="relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition duration-300 h-full">
+                        <a href="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3" data-lightbox="gallery" data-title="Rustic Wedding - Barn Celebration">
+                            <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3" alt="Wedding" class="w-full h-64 object-cover transition duration-300 hover:scale-105">
+                        </a>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-end p-4">
+                            <h3 class="text-xl font-bold text-white mb-1">Rustic Wedding</h3>
+                            <p class="text-gray-200 text-sm">Barn Celebration</p>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="text-gray-200 text-xs"><i class="fas fa-heart mr-1"></i> 26</span>
+                                <div class="flex space-x-2">
+                                    <button class="share-btn text-white hover:text-accent transition" data-image="wedding3.jpg">
+                                        <i class="fas fa-share-alt"></i>
+                                    </button>
+                                    <button class="favorite-btn text-white hover:text-accent transition">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item corporate" data-date="2022-11-15" data-likes="33">
+                    <div class="relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition duration-300 h-full">
+                        <a href="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3" data-lightbox="gallery" data-title="Networking Gala - Black-Tie Event">
+                            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3" alt="Corporate" class="w-full h-64 object-cover transition duration-300 hover:scale-105">
+                        </a>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-end p-4">
+                            <h3 class="text-xl font-bold text-white mb-1">Networking Gala</h3>
+                            <p class="text-gray-200 text-sm">Black-Tie Event</p>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="text-gray-200 text-xs"><i class="fas fa-heart mr-1"></i> 33</span>
+                                <div class="flex space-x-2">
+                                    <button class="share-btn text-white hover:text-accent transition" data-image="corporate3.jpg">
+                                        <i class="fas fa-share-alt"></i>
+                                    </button>
+                                    <button class="favorite-btn text-white hover:text-accent transition">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Load More Button -->
+            <div class="text-center mt-12">
+                <button id="loadMoreBtn" class="inline-block border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold py-3 px-8 rounded-full transition duration-300">
+                    Load More
+                </button>
+                <div id="loadingSpinner" class="hidden mt-4">
+                    <i class="fas fa-spinner loading-spinner text-2xl text-primary"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Share Modal -->
+    <div id="shareModal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white dark:bg-dark-800 rounded-xl p-6 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold">Share This Image</h3>
+                <button id="closeShareModal" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="flex space-x-4 justify-center mb-6">
+                <a href="#" class="share-option bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-blue-700 transition">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="share-option bg-pink-600 text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-pink-700 transition">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="share-option bg-blue-400 text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-blue-500 transition">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="share-option bg-red-600 text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-red-700 transition">
+                    <i class="fab fa-pinterest-p"></i>
+                </a>
+            </div>
+            <div class="relative">
+                <input type="text" id="shareLink" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-dark-700" readonly>
+                <button id="copyLinkBtn" class="absolute right-2 top-2 bg-primary hover:bg-secondary text-white px-3 py-1 rounded text-sm">
+                    Copy
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <section class="py-16 md:py-20 bg-gradient-to-r from-primary to-secondary text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Plan Your Dream Event?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Let's create something unforgettable together.</p>
+            <a href="contact.html" class="inline-block bg-white text-primary hover:bg-gray-100 font-semibold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
+                Get in Touch
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 dark:bg-dark-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4"><span class="gradient-text">Dream</span>Events</h3>
+                    <p class="text-gray-400">Making your events extraordinary with professional planning and creative vision.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="events.html" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-white transition">Services</a></li>
+                        <li><a href="gallery.html" class="text-gray-400 hover:text-white transition">Gallery</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Wedding Planning</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Corporate Events</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Birthday Parties</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Venue Selection</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Event Design</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Subscribe to our newsletter for the latest updates and offers.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 w-full rounded-l-lg focus:outline-none text-gray-800">
+                        <button type="submit" class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-r-lg">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 mb-4 md:mb-0">&copy; <span id="currentYear"></span> DreamEvents. All Rights Reserved.</p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    
+    <!-- Main JavaScript -->
+    <script>
+        // Initialize Masonry layout for gallery grid
+        const galleryGrid = document.getElementById('galleryGrid');
+        const masonry = new Masonry(galleryGrid, {
+            itemSelector: '.gallery-item',
+            columnWidth: '.gallery-item',
+            percentPosition: true,
+            gutter: 24
+        });
+        
+        // Lightbox configuration
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'showImageNumberLabel': true,
+            'positionFromTop': 100,
+            'disableScrolling': true
+        });
+        
+        // 1. Mobile menu toggle functionality
+        document.getElementById('mobileMenuButton').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+            this.querySelector('i').classList.toggle('fa-bars');
+            this.querySelector('i').classList.toggle('fa-times');
+        });
+        
+        // 2. Current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // 3. Gallery filtering
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('active', 'bg-primary', 'text-white');
+                    b.classList.add('bg-gray-200', 'hover:bg-gray-300', 'dark:bg-dark-700', 'dark:hover:bg-dark-600');
+                });
+                
+                // Update category counters
+                document.querySelectorAll('.category-counter').forEach(counter => {
+                    counter.classList.remove('active', 'bg-white', 'text-primary');
+                    counter.classList.add('bg-gray-100', 'text-gray-800', 'dark:bg-dark-600', 'dark:text-gray-200');
+                });
+                
+                // Add active class to clicked button
+                this.classList.add('active', 'bg-primary', 'text-white');
+                this.classList.remove('bg-gray-200', 'hover:bg-gray-300', 'dark:bg-dark-700', 'dark:hover:bg-dark-600');
+                
+                // Update clicked button's counter
+                const counter = this.querySelector('.category-counter');
+                if (counter) {
+                    counter.classList.add('active', 'bg-white', 'text-primary');
+                    counter.classList.remove('bg-gray-100', 'text-gray-800', 'dark:bg-dark-600', 'dark:text-gray-200');
+                }
+                
+                const filter = this.getAttribute('data-filter');
+                const items = document.querySelectorAll('.gallery-item');
+                
+                items.forEach(item => {
+                    if (filter === 'all' || item.classList.contains(filter)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // Re-layout masonry after filtering
+                setTimeout(() => {
+                    masonry.layout();
+                }, 300);
+            });
+        });
+        
+        // 4. Favorite button functionality
+        document.querySelectorAll('.favorite-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.classList.toggle('active');
+                this.querySelector('i').classList.toggle('far');
+                this.querySelector('i').classList.toggle('fas');
+                
+                // Update likes count (simulated)
+                const likesElement = this.closest('.gallery-item').querySelector('.text-xs i');
+                const currentLikes = parseInt(likesElement.parentNode.textContent.trim());
+                if (this.classList.contains('active')) {
+                    likesElement.parentNode.textContent = ` ${currentLikes + 1}`;
+                } else {
+                    likesElement.parentNode.textContent = ` ${currentLikes - 1}`;
+                }
+            });
+        });
+        
+        // 5. Share button functionality
+        let currentImageToShare = '';
+        
+        document.querySelectorAll('.share-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                currentImageToShare = this.getAttribute('data-image');
+                const shareLink = `${window.location.origin}/images/${currentImageToShare}`;
+                document.getElementById('shareLink').value = shareLink;
+                document.getElementById('shareModal').classList.remove('hidden');
+            });
+        });
+        
+        document.getElementById('closeShareModal').addEventListener('click', function() {
+            document.getElementById('shareModal').classList.add('hidden');
+        });
+        
+        document.getElementById('copyLinkBtn').addEventListener('click', function() {
+            const shareLink = document.getElementById('shareLink');
+            shareLink.select();
+            document.execCommand('copy');
+            
+            // Show copied feedback
+            const originalText = this.textContent;
+            this.textContent = 'Copied!';
+            setTimeout(() => {
+                this.textContent = originalText;
+            }, 2000);
+        });
+        
+        // Close modal when clicking outside
+        document.getElementById('shareModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.add('hidden');
+            }
+        });
+        
+        // 6. Sort functionality
+        document.getElementById('sortSelect').addEventListener('change', function() {
+            const sortValue = this.value;
+            const items = Array.from(document.querySelectorAll('.gallery-item'));
+            
+            items.sort((a, b) => {
+                if (sortValue === 'newest') {
+                    return new Date(b.getAttribute('data-date')) - new Date(a.getAttribute('data-date'));
+                } else if (sortValue === 'oldest') {
+                    return new Date(a.getAttribute('data-date')) - new Date(b.getAttribute('data-date'));
+                } else if (sortValue === 'popular') {
+                    return parseInt(b.getAttribute('data-likes')) - parseInt(a.getAttribute('data-likes'));
+                }
+                return 0;
+            });
+            
+            // Re-append sorted items
+            const galleryGrid = document.getElementById('galleryGrid');
+            galleryGrid.innerHTML = '';
+            items.forEach(item => {
+                galleryGrid.appendChild(item);
+            });
+            
+            // Re-layout masonry after sorting
+            setTimeout(() => {
+                masonry.layout();
+            }, 300);
+        });
+        
+        // 7. Search functionality
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const items = document.querySelectorAll('.gallery-item');
+            
+            items.forEach(item => {
+                const title = item.querySelector('h3').textContent.toLowerCase();
+                const description = item.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Re-layout masonry after searching
+            setTimeout(() => {
+                masonry.layout();
+            }, 300);
+        });
+        
+        // 8. Infinite scroll / Load more functionality
+        document.getElementById('loadMoreBtn').addEventListener('click', function() {
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            this.style.display = 'none';
+            loadingSpinner.classList.remove('hidden');
+            
+            // Simulate loading more items
+            setTimeout(() => {
+                // In a real app, you would fetch more items from an API
+                // Here we're just duplicating existing items for demonstration
+                const galleryGrid = document.getElementById('galleryGrid');
+                const existingItems = galleryGrid.querySelectorAll('.gallery-item');
+                const itemsToAdd = Array.from(existingItems).slice(0, 4); // Add first 4 items again
+                
+                itemsToAdd.forEach(item => {
+                    const clone = item.cloneNode(true);
+                    galleryGrid.appendChild(clone);
+                });
+                
+                // Reinitialize masonry with new items
+                masonry.reloadItems();
+                masonry.layout();
+                
+                // Reattach event listeners to new items
+                attachEventListenersToNewItems();
+                
+                loadingSpinner.classList.add('hidden');
+                this.style.display = 'inline-block';
+            }, 1500);
+        });
+        
+        // Function to attach event listeners to newly added items
+        function attachEventListenersToNewItems() {
+            // Favorite buttons
+            document.querySelectorAll('.favorite-btn').forEach(btn => {
+                if (!btn.hasAttribute('data-listener-attached')) {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.classList.toggle('active');
+                        this.querySelector('i').classList.toggle('far');
+                        this.querySelector('i').classList.toggle('fas');
+                    });
+                    btn.setAttribute('data-listener-attached', 'true');
+                }
+            });
+            
+            // Share buttons
+            document.querySelectorAll('.share-btn').forEach(btn => {
+                if (!btn.hasAttribute('data-listener-attached')) {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        currentImageToShare = this.getAttribute('data-image');
+                        const shareLink = `${window.location.origin}/images/${currentImageToShare}`;
+                        document.getElementById('shareLink').value = shareLink;
+                        document.getElementById('shareModal').classList.remove('hidden');
+                    });
+                    btn.setAttribute('data-listener-attached', 'true');
+                }
+            });
+        }
+        
+        // 9. Dark mode toggle
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            html.classList.toggle('dark');
+            localStorage.setItem('darkMode', html.classList.contains('dark') ? 'enabled' : 'disabled');
+            
+            // Update icon
+            const icons = document.querySelectorAll('.fa-moon, .fa-sun');
+            icons.forEach(icon => {
+                icon.classList.toggle('fa-moon');
+                icon.classList.toggle('fa-sun');
+            });
+        }
+        
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.documentElement.classList.add('dark');
+            // Update icons to sun
+            const moonIcons = document.querySelectorAll('.fa-moon');
+            moonIcons.forEach(icon => {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            });
+        }
+        
+        // Add event listeners for dark mode toggles
+        document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
+        document.getElementById('mobileDarkModeToggle').addEventListener('click', toggleDarkMode);
+        
+        // 10. Keyboard navigation for gallery
+        document.addEventListener('keydown', function(e) {
+            const lightbox = document.querySelector('.lb-container');
+            if (lightbox && !lightbox.classList.contains('hidden')) {
+                if (e.key === 'Escape') {
+                    document.querySelector('.lb-close').click();
+                } else if (e.key === 'ArrowLeft') {
+                    document.querySelector('.lb-prev').click();
+                } else if (e.key === 'ArrowRight') {
+                    document.querySelector('.lb-next').click();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

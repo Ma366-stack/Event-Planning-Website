@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamEvents | Professional Event Planning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ff6b6b',
+                        secondary: '#ff5252',
+                    },
+                    fontFamily: {
+                        sans: ['Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <!-- Navigation Bar -->
+    <nav class="fixed w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0">
+                    <h1 class="text-2xl font-bold"><span class="text-primary">Dream</span>Events</h1>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <ul class="flex space-x-8">
+                        <li><a href="#" class="text-primary font-semibold hover:text-secondary transition">Home</a></li>
+                        <li><a href="#" class="font-semibold hover:text-primary transition">Events</a></li>
+                        <li><a href="#" class="font-semibold hover:text-primary transition">Services</a></li>
+                        <li><a href="#" class="font-semibold hover:text-primary transition">Gallery</a></li>
+                        <li><a href="#" class="font-semibold hover:text-primary transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button class="text-gray-800 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 md:pt-40 md:pb-28 lg:pt-48 lg:pb-36 bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3')">
+        <div class="container mx-auto px-4 text-center text-white">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Turning Dreams Into Unforgettable Events</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Professional event planning for weddings, corporate events, birthdays, and more.</p>
+            <a href="#" class="inline-block bg-primary hover:bg-secondary text-white font-semibold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
+                Get Started
+            </a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-16 md:py-20 lg:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16">Our Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Wedding Service -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-2 text-center">
+                    <div class="text-primary text-4xl mb-6">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">Weddings</h3>
+                    <p class="text-gray-600">Beautifully crafted weddings tailored to your vision.</p>
+                </div>
+                
+                <!-- Corporate Service -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-2 text-center">
+                    <div class="text-primary text-4xl mb-6">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">Corporate Events</h3>
+                    <p class="text-gray-600">Professional and seamless corporate gatherings.</p>
+                </div>
+                
+                <!-- Birthday Service -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-2 text-center">
+                    <div class="text-primary text-4xl mb-6">
+                        <i class="fas fa-birthday-cake"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">Birthdays</h3>
+                    <p class="text-gray-600">Memorable celebrations for all ages.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="py-16 md:py-20 lg:py-24 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16">What Our Clients Say</h2>
+            <div class="max-w-3xl mx-auto bg-white p-8 md:p-10 rounded-lg shadow-md text-center">
+                <p class="text-xl md:text-2xl italic mb-6">"DreamEvents made my wedding day absolutely perfect! Highly recommend!"</p>
+                <h4 class="text-primary text-lg font-semibold">- Sarah Johnson</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-2xl font-bold"><span class="text-primary">Dream</span>Events</h2>
+                    <p class="mt-2 text-gray-400">Making your events extraordinary.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-xl transition">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white text-xl transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white text-xl transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white text-xl transition">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 DreamEvents. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Responsive Features -->
+    <script>
+        // 1. Mobile menu toggle functionality
+        document.querySelector('.md\\:hidden button').addEventListener('click', function() {
+            const menu = document.querySelector('.md\\:block ul');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('block');
+            menu.classList.toggle('absolute');
+            menu.classList.toggle('bg-white');
+            menu.classList.toggle('w-full');
+            menu.classList.toggle('left-0');
+            menu.classList.toggle('px-4');
+            menu.classList.toggle('py-2');
+            menu.classList.toggle('shadow-md');
+        });
+
+        // 2. Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 3. Scroll reveal animation
+        window.addEventListener('scroll', revealOnScroll);
+
+        function revealOnScroll() {
+            const elements = document.querySelectorAll('.transform');
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                if (elementPosition < screenPosition) {
+                    element.classList.add('opacity-100', 'translate-y-0');
+                    element.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }
+
+        // Initialize elements with opacity-0 for scroll reveal
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.card, .testimonial-card').forEach(el => {
+                el.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-500');
+            });
+            revealOnScroll(); // Run once on load
+        });
+
+        // 4. Responsive video background (could be added to hero section)
+        // 5. Form validation (for contact page)
+        // 6. Dark mode toggle (could be added to navbar)
+        // 7. Lazy loading for images
+        // 8. Service card flip animation on mobile
+        // 9. Back to top button
+        // 10. Current year in footer
+        document.querySelector('.copyright').innerHTML = `&copy; ${new Date().getFullYear()} DreamEvents. All Rights Reserved.`;
+    </script>
+</body>
+</html>

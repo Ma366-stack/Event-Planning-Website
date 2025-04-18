@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamEvents | Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">
+            <h1><span>Dream</span>Events</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html" class="active">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="burger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Gallery Banner -->
+    <section class="gallery-banner">
+        <div class="banner-content">
+            <h1>Our Gallery</h1>
+            <p>Explore the magic we’ve created for our clients.</p>
+        </div>
+    </section>
+
+    <!-- Gallery Filter -->
+    <section class="gallery-filter">
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All Events</button>
+            <button class="filter-btn" data-filter="wedding">Weddings</button>
+            <button class="filter-btn" data-filter="corporate">Corporate</button>
+            <button class="filter-btn" data-filter="birthday">Birthdays</button>
+        </div>
+    </section>
+
+    <!-- Photo Gallery Grid -->
+    <section class="photo-gallery">
+        <div class="gallery-grid">
+            <!-- Wedding Images -->
+            <div class="gallery-item wedding">
+                <img src="wedding1.jpg" alt="Wedding">
+                <div class="overlay">
+                    <h3>Elegant Wedding</h3>
+                    <p>Grand Ballroom Celebration</p>
+                </div>
+            </div>
+            <div class="gallery-item wedding">
+                <img src="wedding2.jpg" alt="Wedding">
+                <div class="overlay">
+                    <h3>Outdoor Wedding</h3>
+                    <p>Beachside Ceremony</p>
+                </div>
+            </div>
+            <!-- Corporate Images -->
+            <div class="gallery-item corporate">
+                <img src="coporate1.jpg" alt="Corporate">
+                <div class="overlay">
+                    <h3>Business Conference</h3>
+                    <p>Annual Tech Summit</p>
+                </div>
+            </div>
+            <div class="gallery-item corporate">
+                <img src="coperate2.jpg" alt="Corporate">
+                <div class="overlay">
+                    <h3>Product Launch</h3>
+                    <p>Innovative Showcase</p>
+                </div>
+            </div>
+            <!-- Birthday Images -->
+            <div class="gallery-item birthday">
+                <img src="birthday1.jpg" alt="Birthday">
+                <div class="overlay">
+                    <h3>Sweet 16 Party</h3>
+                    <p>Pink & Gold Theme</p>
+                </div>
+            </div>
+            <div class="gallery-item birthday">
+                <img src="birthday2.jpg" alt="Birthday">
+                <div class="overlay">
+                    <h3>Kids Birthday</h3>
+                    <p>Superhero Adventure</p>
+                </div>
+            </div>
+            <!-- More Images -->
+            <div class="gallery-item wedding">
+                <img src="wedding3.jpg" alt="Wedding">
+                <div class="overlay">
+                    <h3>Rustic Wedding</h3>
+                    <p>Barn Celebration</p>
+                </div>
+            </div>
+            <div class="gallery-item corporate">
+                <img src="coperate3.jpg" alt="Corporate">
+                <div class="overlay">
+                    <h3>Networking Gala</h3>
+                    <p>Black-Tie Event</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <h2>Ready to Plan Your Dream Event?</h2>
+        <p>Let’s create something unforgettable together.</p>
+        <a href="contact.html" class="btn">Get in Touch</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2><span>Dream</span>Events</h2>
+                <p>Making your events extraordinary.</p>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024 DreamEvents. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Simple JavaScript for Filtering (Optional) -->
+    <script>
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-filter');
+                const items = document.querySelectorAll('.gallery-item');
+                
+                items.forEach(item => {
+                    if (filter === 'all' || item.classList.contains(filter)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

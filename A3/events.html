@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamEvents | Our Events</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ff6b6b',
+                        secondary: '#ff5252',
+                    },
+                    fontFamily: {
+                        sans: ['Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <!-- Navigation Bar -->
+    <nav class="fixed w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0">
+                    <h1 class="text-2xl font-bold"><span class="text-primary">Dream</span>Events</h1>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <ul class="flex space-x-8">
+                        <li><a href="index.html" class="font-semibold hover:text-primary transition">Home</a></li>
+                        <li><a href="events.html" class="text-primary font-semibold hover:text-secondary transition">Events</a></li>
+                        <li><a href="services.html" class="font-semibold hover:text-primary transition">Services</a></li>
+                        <li><a href="gallery.html" class="font-semibold hover:text-primary transition">Gallery</a></li>
+                        <li><a href="contact.html" class="font-semibold hover:text-primary transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button class="text-gray-800 focus:outline-none mobile-menu-button">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div class="md:hidden hidden mobile-menu">
+                <ul class="px-2 pt-2 pb-4 space-y-2">
+                    <li><a href="index.html" class="block px-3 py-2 rounded-md hover:bg-gray-100">Home</a></li>
+                    <li><a href="events.html" class="block px-3 py-2 rounded-md bg-primary text-white">Events</a></li>
+                    <li><a href="services.html" class="block px-3 py-2 rounded-md hover:bg-gray-100">Services</a></li>
+                    <li><a href="gallery.html" class="block px-3 py-2 rounded-md hover:bg-gray-100">Gallery</a></li>
+                    <li><a href="contact.html" class="block px-3 py-2 rounded-md hover:bg-gray-100">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Events Banner -->
+    <section class="pt-32 pb-20 md:pt-40 md:pb-28 bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3')">
+        <div class="container mx-auto px-4 text-center text-white">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Our Events</h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto">Discover the perfect event tailored just for you.</p>
+        </div>
+    </section>
+
+    <!-- Event Categories Section -->
+    <section class="py-16 md:py-20 lg:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16">Event Categories</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Wedding Category -->
+                <div class="category-card relative h-80 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3'); background-size: cover; background-position: center;">
+                    <div class="absolute inset-0 flex flex-col justify-center items-center text-center p-6 text-white">
+                        <h3 class="text-2xl font-bold mb-3">Weddings</h3>
+                        <p class="mb-6">Elegant and personalized wedding celebrations.</p>
+                        <a href="#" class="inline-block bg-primary hover:bg-secondary text-white font-semibold py-2 px-6 rounded-full transition duration-300 transform hover:scale-105">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Corporate Category -->
+                <div class="category-card relative h-80 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1431540015161-0bf868a2d407?ixlib=rb-4.0.3'); background-size: cover; background-position: center;">
+                    <div class="absolute inset-0 flex flex-col justify-center items-center text-center p-6 text-white">
+                        <h3 class="text-2xl font-bold mb-3">Corporate Events</h3>
+                        <p class="mb-6">Professional and impactful business gatherings.</p>
+                        <a href="#" class="inline-block bg-primary hover:bg-secondary text-white font-semibold py-2 px-6 rounded-full transition duration-300 transform hover:scale-105">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Birthday Category -->
+                <div class="category-card relative h-80 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-4.0.3'); background-size: cover; background-position: center;">
+                    <div class="absolute inset-0 flex flex-col justify-center items-center text-center p-6 text-white">
+                        <h3 class="text-2xl font-bold mb-3">Birthdays</h3>
+                        <p class="mb-6">Fun and memorable birthday parties.</p>
+                        <a href="#" class="inline-block bg-primary hover:bg-secondary text-white font-semibold py-2 px-6 rounded-full transition duration-300 transform hover:scale-105">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Social Gatherings Category -->
+                <div class="category-card relative h-80 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1531058020387-3be344556be6?ixlib=rb-4.0.3'); background-size: cover; background-position: center;">
+                    <div class="absolute inset-0 flex flex-col justify-center items-center text-center p-6 text-white">
+                        <h3 class="text-2xl font-bold mb-3">Social Gatherings</h3>
+                        <p class="mb-6">Casual and lively social events.</p>
+                        <a href="#" class="inline-block bg-primary hover:bg-secondary text-white font-semibold py-2 px-6 rounded-full transition duration-300 transform hover:scale-105">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Events Section -->
+    <section class="py-16 md:py-20 lg:py-24 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16">Upcoming Events</h2>
+            <div class="max-w-4xl mx-auto space-y-8">
+                <!-- Summer Wedding Fair -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+                    <div class="flex flex-col md:flex-row">
+                        <div class="md:w-1/3">
+                            <img src="https://images.unsplash.com/photo-1494972308805-463bc619d34e?ixlib=rb-4.0.3" alt="Summer Wedding" class="w-full h-64 md:h-full object-cover">
+                        </div>
+                        <div class="p-6 md:w-2/3">
+                            <h3 class="text-2xl font-bold mb-4">Summer Wedding Fair</h3>
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-calendar-alt text-primary mr-3"></i>
+                                <p>June 15, 2024</p>
+                            </div>
+                            <div class="flex items-center mb-6">
+                                <i class="fas fa-map-marker-alt text-primary mr-3"></i>
+                                <p>Grand Palace Hotel</p>
+                            </div>
+                            <a href="#" class="inline-block bg-primary hover:bg-secondary text-white font-semibold py-2 px-6 rounded-full transition duration-300">
+                                Register Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Business Leadership Summit -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+                    <div class="flex flex-col md:flex-row">
+                        <div class="md:w-1/3">
+                            <img src="https://images.unsplash.com/photo-1527525443983-6e60c75fff46?ixlib=rb-4.0.3" alt="Corporate Seminar" class="w-full h-64 md:h-full object-cover">
+                        </div>
+                        <div class="p-6 md:w-2/3">
+                            <h3 class="text-2xl font-bold mb-4">Business Leadership Summit</h3>
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-calendar-alt text-primary mr-3"></i>
+                                <p>July 22, 2024</p>
+                            </div>
+                            <div class="flex items-center mb-6">
+                                <i class="fas fa-map-marker-alt text-primary mr-3"></i>
+                                <p>Convention Center</p>
+                            </div>
+                            <a href="#" class="inline-block bg-primary hover:bg-secondary text-white font-semibold py-2 px-6 rounded-full transition duration-300">
+                                Register Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-2xl font-bold"><span class="text-primary">Dream</span>Events</h2>
+                    <p class="mt-2 text-gray-400">Making your events extraordinary.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-xl transition">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white text-xl transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white text-xl transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white text-xl transition">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+                <p>&copy; <span id="current-year"></span> DreamEvents. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Responsive Features JavaScript -->
+    <script>
+        // 1. Mobile menu toggle
+        document.querySelector('.mobile-menu-button').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.toggle('hidden');
+        });
+
+        // 2. Current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // 3. Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 4. Scroll animations
+        window.addEventListener('scroll', revealOnScroll);
+
+        function revealOnScroll() {
+            const elements = document.querySelectorAll('.category-card, .event-item');
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                if (elementPosition < screenPosition) {
+                    element.classList.add('opacity-100', 'translate-y-0');
+                    element.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }
+
+        // Initialize elements with opacity-0 for scroll reveal
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.category-card, .event-item').forEach(el => {
+                el.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-500');
+            });
+            revealOnScroll(); // Run once on load
+        });
+
+        // 5. Event card hover effects
+        document.querySelectorAll('.event-item').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.querySelector('a').classList.add('transform', 'scale-105');
+            });
+            card.addEventListener('mouseleave', function() {
+                this.querySelector('a').classList.remove('transform', 'scale-105');
+            });
+        });
+
+        // 6. Category card click effect
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.classList.add('ring-2', 'ring-primary');
+                setTimeout(() => {
+                    this.classList.remove('ring-2', 'ring-primary');
+                }, 300);
+            });
+        });
+
+        // 7. Back to top button (could be added)
+        // 8. Event countdown timers (could be added)
+        // 9. Event filtering by date (could be added)
+        // 10. Event search functionality (could be added)
+        // 11. Event calendar view (could be added)
+        // 12. Event registration modal (could be added)
+        // 13. Share event buttons (could be added)
+        // 14. Event reminders (could be added)
+        // 15. Event location maps (could be added)
+    </script>
+</body>
+</html>

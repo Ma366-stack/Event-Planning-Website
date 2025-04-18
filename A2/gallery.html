@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamEvents | Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ff6b6b',
+                        secondary: '#ff5252',
+                    },
+                    fontFamily: {
+                        sans: ['Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <!-- Navigation Bar -->
+    <nav class="fixed w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0">
+                    <h1 class="text-2xl font-bold"><span class="text-primary">Dream</span>Events</h1>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <ul class="flex space-x-8">
+                        <li><a href="index.html" class="font-semibold hover:text-primary transition">Home</a></li>
+                        <li><a href="events.html" class="font-semibold hover:text-primary transition">Events</a></li>
+                        <li><a href="services.html" class="font-semibold hover:text-primary transition">Services</a></li>
+                        <li><a href="gallery.html" class="text-primary font-semibold hover:text-secondary transition">Gallery</a></li>
+                        <li><a href="contact.html" class="font-semibold hover:text-primary transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button class="text-gray-800 focus:outline-none mobile-menu-button">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div class="md:hidden hidden mobile-menu">
+                <ul class="px-2 pt-2 pb-4 space-y-2">
+                    <li><a href="index.html" class="block px-3 py-2 rounded-md hover:bg-gray-100">Home</a></li>
+                    <li><a href="events.html" class="block px-3 py-2 rounded-md hover:bg-gray-100">Events</a></li>
+                    <li><a href="services.html" class="block px-3 py-2 rounded-md hover:bg-gray-100">Services</a></li>
+                    <li><a href="gallery.html" class="block px-3 py-2 rounded-md bg-primary text-white">Gallery</a></li>
+                    <li><a href="contact.html" class="block px-3 py-2 rounded-md hover:bg-gray-100">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Gallery Banner -->
+    <section class="pt-32 pb-20 md:pt-40 md:pb-28 bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3')">
+        <div class="container mx-auto px-4 text-center text-white">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Our Gallery</h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto">Explore the magic we've created for our clients.</p>
+        </div>
+    </section>
+
+    <!-- Gallery Filter -->
+    <section class="py-8 md:py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="filter-btn active px-6 py-2 rounded-full bg-primary text-white font-semibold transition" data-filter="all">
+                    All Events
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full bg-gray-200 hover:bg-gray-300 font-semibold transition" data-filter="wedding">
+                    Weddings
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full bg-gray-200 hover:bg-gray-300 font-semibold transition" data-filter="corporate">
+                    Corporate
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full bg-gray-200 hover:bg-gray-300 font-semibold transition" data-filter="birthday">
+                    Birthdays
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery Grid -->
+    <section class="py-12 md:py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Wedding Images -->
+                <div class="gallery-item wedding relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105">
+                    <img src="wedding1.jpg" alt="Wedding" class="w-full h-64 object-cover">
+                    <div class="overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Elegant Wedding</h3>
+                        <p class="text-gray-200">Grand Ballroom Celebration</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item wedding relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105">
+                    <img src="wedding2.jpg" alt="Wedding" class="w-full h-64 object-cover">
+                    <div class="overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Outdoor Wedding</h3>
+                        <p class="text-gray-200">Beachside Ceremony</p>
+                    </div>
+                </div>
+                
+                <!-- Corporate Images -->
+                <div class="gallery-item corporate relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105">
+                    <img src="corporate1.jpg" alt="Corporate" class="w-full h-64 object-cover">
+                    <div class="overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Business Conference</h3>
+                        <p class="text-gray-200">Annual Tech Summit</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item corporate relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105">
+                    <img src="corporate2.jpg" alt="Corporate" class="w-full h-64 object-cover">
+                    <div class="overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Product Launch</h3>
+                        <p class="text-gray-200">Innovative Showcase</p>
+                    </div>
+                </div>
+                
+                <!-- Birthday Images -->
+                <div class="gallery-item birthday relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105">
+                    <img src="birthday1.jpg" alt="Birthday" class="w-full h-64 object-cover">
+                    <div class="overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Sweet 16 Party</h3>
+                        <p class="text-gray-200">Pink & Gold Theme</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item birthday relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105">
+                    <img src="birthday2.jpg" alt="Birthday" class="w-full h-64 object-cover">
+                    <div class="overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Kids Birthday</h3>
+                        <p class="text-gray-200">Superhero Adventure</p>
+                    </div>
+                </div>
+                
+                <!-- More Images -->
+                <div class="gallery-item wedding relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105">
+                    <img src="wedding3.jpg" alt="Wedding" class="w-full h-64 object-cover">
+                    <div class="overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Rustic Wedding</h3>
+                        <p class="text-gray-200">Barn Celebration</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item corporate relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105">
+                    <img src="corporate3.jpg" alt="Corporate" class="w-full h-64 object-cover">
+                    <div class="overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-end p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Networking Gala</h3>
+                        <p class="text-gray-200">Black-Tie Event</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 md:py-20 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Plan Your Dream Event?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Let's create something unforgettable together.</p>
+            <a href="contact.html" class="inline-block bg-primary hover:bg-secondary text-white font-semibold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
+                Get in Touch
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-2xl font-bold"><span class="text-primary">Dream</span>Events</h2>
+                    <p class="mt-2 text-gray-400">Making your events extraordinary.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-xl transition">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white text-xl transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white text-xl transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white text-xl transition">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+                <p>&copy; <span id="current-year"></span> DreamEvents. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Responsive Features JavaScript -->
+    <script>
+        // 1. Mobile menu toggle
+        document.querySelector('.mobile-menu-button').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.toggle('hidden');
+        });
+
+        // 2. Current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // 3. Gallery filtering
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('active', 'bg-primary', 'text-white');
+                    b.classList.add('bg-gray-200', 'hover:bg-gray-300');
+                });
+                
+                // Add active class to clicked button
+                this.classList.add('active', 'bg-primary', 'text-white');
+                this.classList.remove('bg-gray-200', 'hover:bg-gray-300');
+                
+                const filter = this.getAttribute('data-filter');
+                const items = document.querySelectorAll('.gallery-item');
+                
+                items.forEach(item => {
+                    if (filter === 'all' || item.classList.contains(filter)) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // 4. Lazy loading for images
+        document.addEventListener('DOMContentLoaded', function() {
+            const lazyImages = document.querySelectorAll('.gallery-item img');
+            
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.getAttribute('src');
+                        img.classList.add('loaded');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+            
+            lazyImages.forEach(img => {
+                imageObserver.observe(img);
+            });
+        });
+
+        // 5. Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 6. Scroll animations
+        window.addEventListener('scroll', revealOnScroll);
+
+        function revealOnScroll() {
+            const elements = document.querySelectorAll('.gallery-item');
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                if (elementPosition < screenPosition) {
+                    element.classList.add('opacity-100', 'translate-y-0');
+                    element.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }
+
+        // Initialize elements with opacity-0 for scroll reveal
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.gallery-item').forEach(el => {
+                el.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-500');
+            });
+            revealOnScroll(); // Run once on load
+        });
+
+        // 7. Image modal for larger view (could be added)
+        // 8. Lightbox functionality (could be added)
+        // 9. Favorite/save images feature (could be added)
+        // 10. Infinite scroll for more images (could be added)
+        // 11. Share buttons for images (could be added)
+        // 12. Sorting options (newest, oldest, popular)
+        // 13. Search functionality for gallery
+        // 14. Category counters (showing number of items per category)
+        // 15. Keyboard navigation for gallery
+    </script>
+</body>
+</html>
